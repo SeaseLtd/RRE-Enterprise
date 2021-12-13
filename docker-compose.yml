@@ -1,0 +1,52 @@
+version: '3'
+services:
+    rree-ui:
+        container_name: rree-ui
+        image: rre-enterprise-ui
+        stdin_open: true
+        environment:
+            RREE_URL: http://rree-server:8080
+        ports:
+            - 3001:3000
+
+    rree-server:
+        container_name: rree-server
+        image: rre-enterprise
+        restart: always
+        environment:
+          - SOLR_URL=http://solr:8983
+          - DB_URL=jdbc:mysql://db:3306/rre
+          - DB_USERNAME=root
+          - DB_PASSWORD=toor
+        ports:
+            - 8081:8080
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        depends_on:
+            - db
+
+    solr:
+        container_name: rree_solr
+        build:
+            context: ./solr
+        ports:
+            - 8984:8983
+        volumes:
+            - solr-data:/var/solr
+
+    db:
+        container_name: rree_mysql
+        restart: always
+        image: mysql/mysql-server:latest
+        command: --default-authentication-plugin=mysql_native_password --mysqlx=0
+        environment:
+            MYSQL_ROOT_PASSWORD: 'toor'
+        volumes:
+            - db-data:/var/lib/mysql
+            - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+        ports:
+            - "3307:3306"
+
+volumes:
+    solr-data:
+    db-data:

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema name="evaluation" version="1.5">
+
+    <field name="_version_" type="plong" indexed="true" stored="true"/>
+    <field name="_root_" type="string" indexed="true" stored="false"/>
+    <!-- Evaluation fields-->
+    <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false"/>
+    <field name="collection" type="string" indexed="true" stored="true" docValues="true"/>
+    <field name="topic" type="string" indexed="true" stored="true"/>
+    <field name="queryGroup" type="string" indexed="true" stored="true"/>
+    <field name="query" type="string" indexed="true" stored="true" required="false" docValues="false"/>
+    <field name="blackBoxQueryRequest" type="string" indexed="false" stored="true" required="false" docValues="false"/>
+    <field name="searchEngineQueryRequest" type="string" indexed="false" stored="true" required="false" docValues="false"/>
+    <field name="documents" type="string" indexed="false" stored="true"/>
+    <field name="metric" type="string" indexed="true" stored="true" docValues="true"/>
+    <field name="metricScore" type="pdouble" indexed="true" stored="true"/>
+    <field name="inputRatingsTag" type="string" indexed="true" stored="false"/>
+    <field name="iterationTimestamp" type="pdate" indexed="true" stored="true" />
+    <field name="iterationLabel" type="string" indexed="true" stored="true"/>
+    <field name="iterationId" type="pint" indexed="true" stored="true" docValues="true"/>
+    <field name="docType" type="string" indexed="true" stored="true" required="true"/>
+    
+    <uniqueKey>id</uniqueKey>
+
+    <!-- The StrField type is not analyzed, but indexed/stored verbatim. -->
+    <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
+
+    <!-- boolean type: "true" or "false" -->
+    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+    <!--
+      Numeric field types that index values using KD-trees.
+      Point fields don't support FieldCache, so they must have docValues="true" if needed for sorting, faceting, functions, etc.
+    -->
+    <fieldType name="pint" class="solr.IntPointField" docValues="true"/>
+    <fieldType name="pfloat" class="solr.FloatPointField" docValues="true"/>
+    <fieldType name="plong" class="solr.LongPointField" docValues="true"/>
+    <fieldType name="pdouble" class="solr.DoublePointField" docValues="true"/>
+
+    <fieldType name="pints" class="solr.IntPointField" docValues="true" multiValued="true"/>
+    <fieldType name="pfloats" class="solr.FloatPointField" docValues="true" multiValued="true"/>
+    <fieldType name="plongs" class="solr.LongPointField" docValues="true" multiValued="true"/>
+    <fieldType name="pdoubles" class="solr.DoublePointField" docValues="true" multiValued="true"/>
+
+    <!-- KD-tree versions of date fields -->
+    <fieldType name="pdate" class="solr.DatePointField" docValues="true"/>
+    <fieldType name="pdates" class="solr.DatePointField" docValues="true" multiValued="true"/>
+</schema>
