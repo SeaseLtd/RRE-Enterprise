@@ -14,7 +14,7 @@ services:
         image: sease/rre-enterprise
         restart: always
         environment:
-          - SOLR_URL=http://solr:8983
+          - SOLR_URL=http://solr:8983/solr
           - DB_URL=jdbc:mysql://db:3306/rre
           - DB_USERNAME=root
           - DB_PASSWORD=toor
