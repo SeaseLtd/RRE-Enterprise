@@ -2,7 +2,7 @@ version: '3'
 services:
     rree-ui:
         container_name: rree-ui
-        image: rre-enterprise-ui
+        image: sease/rre-enterprise-ui
         stdin_open: true
         environment:
             RREE_URL: http://rree-server:8080
@@ -11,7 +11,7 @@ services:
 
     rree-server:
         container_name: rree-server
-        image: rre-enterprise
+        image: sease/rre-enterprise
         restart: always
         environment:
           - SOLR_URL=http://solr:8983
