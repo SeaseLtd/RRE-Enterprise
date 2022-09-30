@@ -8,7 +8,7 @@ Rated Ranking Evaluator-Enterprise
 This repository contains the docker compose instructions to pull RRE-Enterprise from docker-hub and run it locally.
 For additional information:
 
-*Coming Soon
+*Coming Soon...
 
 ## How To Run RRE-Enterprise   
 
