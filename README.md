@@ -19,7 +19,7 @@ docker-compose up
 ```  
   
 Now you need to activate RRE-Enterprise with a free product-key:
-[Get a free product-key!](https://sease.io/draft-rre-form2)  
+[Get a free product-key!](https://sease.io/rated-ranking-evaluator-enterprise)  
 ```
 curl -X POST -F 'user=<userMail>' -F 'productKey=<productKey>' http://localhost:8081/1.0/rre-enterprise-api/license-api/activate
 ```
